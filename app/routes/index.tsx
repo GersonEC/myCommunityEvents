@@ -3,6 +3,7 @@ import * as fs from 'node:fs';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/start';
 import { EventCard } from '../components/EventCard';
+import MilanSkyline from '../assets/skyline-milano.png';
 
 // const filePath = 'count.txt';
 
@@ -33,8 +34,37 @@ export const Route = createFileRoute('/')({
 function Home() {
   return (
     <div>
-      <h1>Home</h1>
-      <EventCard />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <img style={{ margin: 'auto', width: '700px' }} src={MilanSkyline} />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '50px',
+            maxWidth: '700px',
+          }}
+        >
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+        </div>
+      </div>
     </div>
   );
 }
