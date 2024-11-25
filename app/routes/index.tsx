@@ -4,6 +4,7 @@ import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/start';
 import { EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
+import React from 'react';
 
 // const filePath = 'count.txt';
 
@@ -32,8 +33,25 @@ export const Route = createFileRoute('/')({
 });
 
 function Home() {
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+
+  const handleAddEvent = () => {
+    setIsDialogOpen(true);
+  };
+
   return (
     <div>
+      <nav>
+        <button onClick={handleAddEvent}>Add Event</button>
+      </nav>
+
+      <dialog open={isDialogOpen}>
+        <p>Greetings, one and all!</p>
+        <form method='dialog'>
+          <button onClick={() => setIsDialogOpen(false)}>OK</button>
+        </form>
+      </dialog>
+
       <div
         style={{
           display: 'flex',
