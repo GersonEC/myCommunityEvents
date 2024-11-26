@@ -5,6 +5,7 @@ import { createServerFn } from '@tanstack/start';
 import { EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
 import React from 'react';
+import { AddEventForm, AddEventFormType } from '../components/AddEventForm';
 
 // const filePath = 'count.txt';
 
@@ -39,6 +40,10 @@ function Home() {
     setIsDialogOpen(true);
   };
 
+  const handleAddEventSubmit = (values: AddEventFormType) => {
+    console.log({ values });
+  };
+
   return (
     <div>
       <nav>
@@ -46,10 +51,7 @@ function Home() {
       </nav>
 
       <dialog open={isDialogOpen}>
-        <p>Greetings, one and all!</p>
-        <form method='dialog'>
-          <button onClick={() => setIsDialogOpen(false)}>OK</button>
-        </form>
+        <AddEventForm handleSubmit={handleAddEventSubmit} />
       </dialog>
 
       <div
