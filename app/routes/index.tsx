@@ -2,10 +2,11 @@
 import * as fs from 'node:fs';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/start';
-import { EventCard } from '../components/EventCard';
+import { Event, EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
 import React from 'react';
-import { AddEventForm, AddEventFormType } from '../components/AddEventForm';
+import { AddEventForm } from '../components/AddEventForm';
+import { fakeEvents } from '../utils/mocks';
 
 // const filePath = 'count.txt';
 
@@ -35,13 +36,15 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-
+  const [events, setEvents] = React.useState<Event[]>(() => fakeEvents);
   const handleAddEvent = () => {
     setIsDialogOpen(true);
   };
 
-  const handleAddEventSubmit = (values: AddEventFormType) => {
-    console.log({ values });
+  const handleAddEventSubmit = (newEvent: Event) => {
+    console.log({ newEvent });
+    setEvents([...events, newEvent]);
+    setIsDialogOpen(false);
   };
 
   return (
@@ -69,7 +72,7 @@ function Home() {
           justifyContent: 'center',
         }}
       >
-        <div
+        <ul
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -77,13 +80,22 @@ function Home() {
             alignItems: 'center',
             gap: '50px',
             maxWidth: '700px',
+            border: 'solid red',
+            listStyle: 'none',
           }}
         >
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-        </div>
+          {events.map((event: Event, index: number) => (
+            <li key={index}>
+              <EventCard
+                communityName={event.communityName}
+                eventDate={event.eventDate}
+                eventDescription={event.eventDescription}
+                eventLink={event.eventLink}
+                eventTitle={event.eventTitle}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -1,4 +1,18 @@
-export const EventCard = () => {
+export interface Event {
+  communityName: string;
+  eventDate: Date;
+  eventDescription: string;
+  eventLink: string;
+  eventTitle: string;
+}
+
+export const EventCard: React.FC<Event> = ({
+  communityName,
+  eventDate,
+  eventDescription,
+  eventLink,
+  eventTitle,
+}) => {
   return (
     <div
       style={{
@@ -8,12 +22,17 @@ export const EventCard = () => {
         display: 'flex',
         gap: '8px',
         alignItems: 'center',
-        justifyContent: 'space-around',
         padding: '0 8px',
+        maxWidth: '700px',
+        maxHeight: '200px',
       }}
     >
       <div
-        style={{ minWidth: '100px', display: 'flex', justifyContent: 'center' }}
+        style={{
+          minWidth: '100px',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
       >
         <span
           style={{
@@ -25,27 +44,19 @@ export const EventCard = () => {
       </div>
       <div>
         <h2>
-          <a
-            href='https://www.meetup.com/react-js-milano/events/304685624/?eventOrigin=group_upcoming_events'
-            target='_blank'
-          >
-            CSS Superpowers with Layers
+          <a href={eventLink} target='_blank'>
+            {eventTitle}
           </a>
         </h2>
-        <p style={{ textWrap: 'balance' }}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
+        <p style={{ textWrap: 'balance' }}>{eventDescription}</p>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
           }}
         >
-          <p>Giovedi 05 Dic 2024</p>
-          <p>ReactJS Milano meetup</p>
+          <p>{eventDate.toLocaleDateString('it-IT')}</p>
+          <p>{communityName}</p>
         </div>
       </div>
     </div>

@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useForm } from '@tanstack/react-form';
+import { Event } from './EventCard';
 
 interface Props {
-  handleSubmit: (values: AddEventFormType) => void;
+  handleSubmit: (values: Event) => void;
 }
 
-export interface AddEventFormType {
-  communityName: string;
-  eventDate: Date;
-  eventDescription: string;
-  eventLink: string;
-  eventTitle: string;
-}
-
-const initialEventFormDefaultValue: AddEventFormType = {
+const initialEventFormDefaultValue: Event = {
   communityName: '',
   eventDate: new Date(),
   eventDescription: '',
@@ -23,7 +16,7 @@ const initialEventFormDefaultValue: AddEventFormType = {
 };
 
 export const AddEventForm: React.FC<Props> = ({ handleSubmit }) => {
-  const form = useForm<AddEventFormType>({
+  const form = useForm<Event>({
     defaultValues: initialEventFormDefaultValue,
     onSubmit: async ({ value }) => {
       // Do something with form data
@@ -78,8 +71,10 @@ export const AddEventForm: React.FC<Props> = ({ handleSubmit }) => {
             children={(field) => (
               <>
                 <label htmlFor={field.name}>{field.name}</label>
-                <input
+                <textarea
                   name={field.name}
+                  rows={5}
+                  maxLength={300}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
