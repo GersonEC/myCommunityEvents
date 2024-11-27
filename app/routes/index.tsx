@@ -6,7 +6,7 @@ import { Event, EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
 import React from 'react';
 import { AddEventForm } from '../components/AddEventForm';
-import { fakeEvents } from '../utils/mocks';
+import { fakeEvents } from '../utils/fakes';
 
 // const filePath = 'count.txt';
 
