@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useForm } from '@tanstack/react-form';
-import { Event } from './EventCard';
+import { Event as EventPrisma } from '@prisma/client';
 
 interface Props {
   handleSubmit: (values: Event) => void;
 }
+
+type Event = Omit<EventPrisma, 'updatedAt' | 'createdAt' | 'id'>;
 
 const initialEventFormDefaultValue: Event = {
   communityName: '',

@@ -1,12 +1,17 @@
-export interface Event {
-  communityName: string;
-  eventDate: Date;
-  eventDescription: string;
-  eventLink: string;
-  eventTitle: string;
-}
+// export interface Event {
+//   communityName: string;
+//   eventDate: Date;
+//   eventDescription: string;
+//   eventLink: string;
+//   eventTitle: string;
+// }
 
-export const EventCard: React.FC<Event> = ({
+import { Event } from '@prisma/client';
+
+type EventProps = Omit<Event, 'createdAt' | 'updatedAt'>;
+
+export const EventCard: React.FC<EventProps> = ({
+  id,
   communityName,
   eventDate,
   eventDescription,

@@ -1,12 +1,13 @@
 // app/routes/index.tsx
 import * as fs from 'node:fs';
+import React from 'react';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/start';
-import { Event, EventCard } from '../components/EventCard';
+import { EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
-import React from 'react';
 import { AddEventForm } from '../components/AddEventForm';
-import { fakeEvents } from '../utils/fakes';
+import { prisma } from '../utils/prisma';
+import { Event } from '@prisma/client';
 
 // const filePath = 'count.txt';
 
@@ -29,6 +30,10 @@ import { fakeEvents } from '../utils/fakes';
 //     await fs.promises.writeFile(filePath, `${count + data}`);
 //   });
 
+export const getEvents = createServerFn().handler(async () => {
+  return await prisma.event.findMany();
+});
+
 export const Route = createFileRoute('/')({
   component: Home,
   // loader: async () => await getCount(),
@@ -36,10 +41,18 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  const [events, setEvents] = React.useState<Event[]>(() => fakeEvents);
+  const [events, setEvents] = React.useState<Event[]>([]);
   const handleAddEvent = () => {
     setIsDialogOpen(true);
   };
+
+  React.useEffect(() => {
+    const fetchEvents = async () => {
+      const data = (await getEvents()) as Event[];
+      setEvents(data);
+    };
+    fetchEvents();
+  }, []);
 
   const handleAddEventSubmit = (newEvent: Event) => {
     console.log({ newEvent });
@@ -84,9 +97,10 @@ function Home() {
             listStyle: 'none',
           }}
         >
-          {events.map((event: Event, index: number) => (
-            <li key={index}>
+          {events.map((event: Event) => (
+            <li key={event.id}>
               <EventCard
+                id={event.id}
                 communityName={event.communityName}
                 eventDate={event.eventDate}
                 eventDescription={event.eventDescription}
