@@ -62,12 +62,55 @@ function Home() {
 
   return (
     <div>
-      <nav>
-        <button onClick={handleAddEvent}>Add Event</button>
+      <nav
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <h1
+          style={{
+            margin: '0',
+            color: 'white',
+            fontSize: '1.3rem',
+            fontFamily: 'cursive',
+          }}
+        >
+          My Community Events
+        </h1>
+        <button
+          style={{
+            color: 'white',
+            backgroundColor: 'rgba(32,34,38,255)',
+            borderRadius: '4px',
+            border: '1px solid white',
+            boxShadow: 'rgba(255, 255, 255, 50) 1px 1px 2px 0px',
+            padding: '4px 12px',
+          }}
+          onClick={handleAddEvent}
+        >
+          <span>Add Event</span>
+        </button>
       </nav>
 
-      <dialog open={isDialogOpen}>
-        <AddEventForm handleSubmit={handleAddEventSubmit} />
+      {/* Dialog */}
+
+      <dialog
+        style={{
+          backgroundColor: 'rgba(32,34,38,255)',
+          border: 'solid gray',
+          borderRadius: '8px',
+          height: '50%',
+          width: '50%',
+          maxWidth: '600px',
+          minWidth: '250px',
+        }}
+        open={isDialogOpen}
+      >
+        <AddEventForm
+          handleSubmit={handleAddEventSubmit}
+          handleClose={() => setIsDialogOpen(false)}
+        />
       </dialog>
 
       <div
@@ -76,7 +119,19 @@ function Home() {
           justifyContent: 'center',
         }}
       >
-        <img style={{ margin: 'auto', width: '700px' }} src={MilanSkyline} />
+        <div
+          style={{
+            maxWidth: '700px',
+          }}
+        >
+          <img
+            style={{
+              margin: 'auto',
+              width: '100%',
+            }}
+            src={MilanSkyline}
+          />
+        </div>
       </div>
 
       <div
@@ -85,31 +140,28 @@ function Home() {
           justifyContent: 'center',
         }}
       >
-        <ul
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+            alignContent: 'center',
             alignItems: 'center',
             gap: '50px',
-            maxWidth: '700px',
-            border: 'solid red',
-            listStyle: 'none',
           }}
         >
           {events.map((event: Event) => (
-            <li key={event.id}>
-              <EventCard
-                id={event.id}
-                communityName={event.communityName}
-                eventDate={event.eventDate}
-                eventDescription={event.eventDescription}
-                eventLink={event.eventLink}
-                eventTitle={event.eventTitle}
-              />
-            </li>
+            <EventCard
+              key={event.id}
+              id={event.id}
+              communityName={event.communityName}
+              eventDate={event.eventDate}
+              eventDescription={event.eventDescription}
+              eventLink={event.eventLink}
+              eventTitle={event.eventTitle}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

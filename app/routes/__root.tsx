@@ -39,7 +39,13 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <Meta />
       </head>
-      <body>
+      <body
+        style={{
+          backgroundColor: 'rgba(32,34,38,255)',
+          fontFamily: 'Gill Sans',
+          boxSizing: 'content-box',
+        }}
+      >
         {children}
         <ScrollRestoration />
         <Scripts />

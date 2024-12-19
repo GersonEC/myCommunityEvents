@@ -1,11 +1,3 @@
-// export interface Event {
-//   communityName: string;
-//   eventDate: Date;
-//   eventDescription: string;
-//   eventLink: string;
-//   eventTitle: string;
-// }
-
 import { Event } from '@prisma/client';
 
 type EventProps = Omit<Event, 'createdAt' | 'updatedAt'>;
@@ -21,15 +13,17 @@ export const EventCard: React.FC<EventProps> = ({
   return (
     <div
       style={{
-        border: 'solid gray',
+        border: 'solid #582F0E',
         borderRadius: '8px',
-        backgroundColor: '#F0F0F0',
+        backgroundColor: '#FAEDCD',
         display: 'flex',
         gap: '8px',
         alignItems: 'center',
         padding: '0 8px',
+        minWidth: '400px',
         maxWidth: '700px',
         maxHeight: '200px',
+        boxShadow: 'rgba(100, 0, 0, 0.24) 0px 3px 8px',
       }}
     >
       <div
@@ -49,7 +43,7 @@ export const EventCard: React.FC<EventProps> = ({
       </div>
       <div>
         <h2>
-          <a href={eventLink} target='_blank'>
+          <a style={{ color: '#582F0E' }} href={eventLink} target='_blank'>
             {eventTitle}
           </a>
         </h2>
