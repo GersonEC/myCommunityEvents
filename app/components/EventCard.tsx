@@ -24,6 +24,7 @@ export const EventCard: React.FC<EventProps> = ({
         maxWidth: '700px',
         maxHeight: '200px',
         boxShadow: 'rgba(100, 0, 0, 0.24) 0px 3px 8px',
+        margin: '0 8px',
       }}
     >
       <div
@@ -43,7 +44,7 @@ export const EventCard: React.FC<EventProps> = ({
       </div>
       <div>
         <h2>
-          <a style={{ color: '#582F0E' }} href={eventLink} target='_blank'>
+          <a style={{ color: '#0E577B' }} href={eventLink} target='_blank'>
             {eventTitle}
           </a>
         </h2>

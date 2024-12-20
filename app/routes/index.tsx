@@ -93,25 +93,37 @@ function Home() {
         </button>
       </nav>
 
-      {/* Dialog */}
-
-      <dialog
-        style={{
-          backgroundColor: 'rgba(32,34,38,255)',
-          border: 'solid gray',
-          borderRadius: '8px',
-          height: '50%',
-          width: '50%',
-          maxWidth: '600px',
-          minWidth: '250px',
-        }}
-        open={isDialogOpen}
-      >
-        <AddEventForm
-          handleSubmit={handleAddEventSubmit}
-          handleClose={() => setIsDialogOpen(false)}
-        />
-      </dialog>
+      {isDialogOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '100%',
+            backgroundColor: 'rgba(0,0,0, 0.8)',
+          }}
+        >
+          <dialog
+            style={{
+              backgroundColor: 'rgba(32,34,38,255)',
+              border: 'solid gray',
+              borderRadius: '8px',
+              maxWidth: '600px',
+              minWidth: '250px',
+              padding: '0 32px',
+              position: 'absolute',
+              top: '20%',
+            }}
+            open={isDialogOpen}
+          >
+            <AddEventForm
+              handleSubmit={handleAddEventSubmit}
+              handleClose={() => setIsDialogOpen(false)}
+            />
+          </dialog>
+        </div>
+      )}
 
       <div
         style={{

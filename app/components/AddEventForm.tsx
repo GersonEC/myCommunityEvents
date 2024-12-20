@@ -39,20 +39,28 @@ export const AddEventForm: React.FC<Props> = ({
         justifyContent: 'center',
       }}
     >
-      <button
+      <div
         style={{
-          borderRadius: '4px',
-          border: '1px solid white',
-          background: 'none',
-          alignSelf: 'self-end',
-          fontWeight: '600',
-          color: 'white',
-          padding: '8px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
-        onClick={handleClose}
       >
-        X
-      </button>
+        <h2 style={{ color: 'white' }}>Add new Event</h2>
+        <button
+          style={{
+            borderRadius: '4px',
+            border: '1px solid white',
+            background: 'none',
+            fontWeight: '600',
+            color: 'white',
+            padding: '8px',
+          }}
+          onClick={handleClose}
+        >
+          X
+        </button>
+      </div>
       <form
         style={{
           display: 'flex',
@@ -192,7 +200,17 @@ export const AddEventForm: React.FC<Props> = ({
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button style={{ padding: '4px 16px' }} type='submit'>
+          <button
+            style={{
+              color: 'rgba(32,34,38,255)',
+              backgroundColor: 'white',
+              borderRadius: '4px',
+              border: '1px solid white',
+              padding: '4px 24px',
+              fontWeight: '600',
+            }}
+            type='submit'
+          >
             Submit
           </button>
         </div>
