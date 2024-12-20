@@ -57,6 +57,7 @@ export const AddEventForm: React.FC<Props> = ({
             padding: '8px',
           }}
           onClick={handleClose}
+          title='Close'
         >
           X
         </button>
@@ -86,9 +87,10 @@ export const AddEventForm: React.FC<Props> = ({
                 <input
                   style={{
                     width: '100%',
-                    padding: '4px 2px',
+                    padding: '6px 2px',
                     borderStyle: 'none',
                     borderRadius: '2px',
+                    backgroundColor: '#DDDDDD',
                   }}
                   name={field.name}
                   value={field.state.value}
@@ -110,9 +112,10 @@ export const AddEventForm: React.FC<Props> = ({
                 <input
                   style={{
                     width: '100%',
-                    padding: '4px 2px',
+                    padding: '6px 2px',
                     borderStyle: 'none',
                     borderRadius: '2px',
+                    backgroundColor: '#DDDDDD',
                   }}
                   name={field.name}
                   value={field.state.value}
@@ -134,9 +137,10 @@ export const AddEventForm: React.FC<Props> = ({
                 <textarea
                   style={{
                     width: '100%',
-                    padding: '4px 2px',
+                    padding: '6px 2px',
                     borderStyle: 'none',
                     borderRadius: '2px',
+                    backgroundColor: '#DDDDDD',
                   }}
                   name={field.name}
                   rows={5}
@@ -160,9 +164,10 @@ export const AddEventForm: React.FC<Props> = ({
                 <input
                   style={{
                     width: '100%',
-                    padding: '4px 2px',
+                    padding: '6px 2px',
                     borderStyle: 'none',
                     borderRadius: '2px',
+                    backgroundColor: '#DDDDDD',
                   }}
                   name={field.name}
                   value={field.state.value}
@@ -184,9 +189,10 @@ export const AddEventForm: React.FC<Props> = ({
                 <input
                   style={{
                     width: '100%',
-                    padding: '4px 2px',
+                    padding: '6px 2px',
                     borderStyle: 'none',
                     borderRadius: '2px',
+                    backgroundColor: '#DDDDDD',
                   }}
                   name={field.name}
                   type='date'
@@ -206,7 +212,7 @@ export const AddEventForm: React.FC<Props> = ({
               backgroundColor: 'white',
               borderRadius: '4px',
               border: '1px solid white',
-              padding: '4px 24px',
+              padding: '6px 24px',
               fontWeight: '600',
             }}
             type='submit'

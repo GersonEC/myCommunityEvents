@@ -22,21 +22,22 @@ export const EventCard: React.FC<EventProps> = ({
         padding: '0 8px',
         minWidth: '400px',
         maxWidth: '700px',
-        maxHeight: '200px',
+        width: '90%',
+        maxHeight: '350px',
         boxShadow: 'rgba(100, 0, 0, 0.24) 0px 3px 8px',
         margin: '0 8px',
       }}
     >
       <div
         style={{
-          minWidth: '100px',
+          minWidth: '70px',
           display: 'flex',
           justifyContent: 'center',
         }}
       >
         <span
           style={{
-            fontSize: '3rem',
+            fontSize: '2rem',
           }}
         >
           🗓️
@@ -44,7 +45,12 @@ export const EventCard: React.FC<EventProps> = ({
       </div>
       <div>
         <h2>
-          <a style={{ color: '#0E577B' }} href={eventLink} target='_blank'>
+          <a
+            style={{ color: '#0E577B' }}
+            href={eventLink}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {eventTitle}
           </a>
         </h2>

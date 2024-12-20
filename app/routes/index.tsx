@@ -109,9 +109,9 @@ function Home() {
               backgroundColor: 'rgba(32,34,38,255)',
               border: 'solid gray',
               borderRadius: '8px',
+              width: '80%',
               maxWidth: '600px',
               minWidth: '250px',
-              padding: '0 32px',
               position: 'absolute',
               top: '20%',
             }}
