@@ -9,30 +9,26 @@ import { AddEventForm } from '../components/AddEventForm';
 import { prisma } from '../utils/prisma';
 import { Event } from '@prisma/client';
 
-// const filePath = 'count.txt';
-
-// async function readCount() {
-//   return parseInt(
-//     await fs.promises.readFile(filePath, 'utf-8').catch(() => '0')
-//   );
-// }
-
-// const getCount = createServerFn({
-//   method: 'GET',
-// }).handler(() => {
-//   return readCount();
-// });
-
-// const updateCount = createServerFn({ method: 'POST' })
-//   .validator((d: number) => d)
-//   .handler(async ({ data }) => {
-//     const count = await readCount();
-//     await fs.promises.writeFile(filePath, `${count + data}`);
-//   });
-
 export const getEvents = createServerFn().handler(async () => {
   return await prisma.event.findMany();
 });
+
+const addEvent = createServerFn({ method: 'POST' })
+  .validator((d: Event) => d)
+  .handler(async ({ data }) => {
+    const newEvent = await prisma.event.create({ data });
+    return newEvent;
+  });
+
+const removeEvent = createServerFn({ method: 'POST' })
+  .validator((d: string) => d)
+  .handler(async ({ data }) => {
+    return await prisma.event.delete({
+      where: {
+        id: data,
+      },
+    });
+  });
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -54,10 +50,16 @@ function Home() {
     fetchEvents();
   }, []);
 
-  const handleAddEventSubmit = (newEvent: Event) => {
-    console.log({ newEvent });
+  const handleAddEventSubmit = async (newEvent: Event) => {
     setEvents([...events, newEvent]);
     setIsDialogOpen(false);
+    await addEvent({ data: newEvent });
+  };
+
+  const handleEventDelete = async (id: string) => {
+    const newEvents = events.filter((event) => event.id !== id);
+    setEvents(newEvents);
+    await removeEvent({ data: id });
   };
 
   return (
@@ -159,7 +161,7 @@ function Home() {
             justifyContent: 'center',
             alignContent: 'center',
             alignItems: 'center',
-            gap: '50px',
+            gap: '40px',
           }}
         >
           {events.map((event: Event) => (
@@ -171,6 +173,7 @@ function Home() {
               eventDescription={event.eventDescription}
               eventLink={event.eventLink}
               eventTitle={event.eventTitle}
+              handleDelete={handleEventDelete}
             />
           ))}
         </div>

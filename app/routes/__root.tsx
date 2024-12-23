@@ -43,7 +43,6 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         style={{
           backgroundColor: 'rgba(32,34,38,255)',
           fontFamily: 'Gill Sans',
-          boxSizing: 'content-box',
           maxWidth: '700px',
           margin: 'auto',
           padding: '12px 8px',
