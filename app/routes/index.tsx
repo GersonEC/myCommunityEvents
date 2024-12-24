@@ -31,16 +31,31 @@ const removeEvent = createServerFn({ method: 'POST' })
     });
   });
 
+const updateEvent = createServerFn({ method: 'POST' })
+  .validator((event: Event) => event)
+  .handler(async ({ data }) => {
+    return await prisma.event.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
+  });
+
 export const Route = createFileRoute('/')({
   component: Home,
   // loader: async () => await getCount(),
 });
 
 function Home() {
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [isDialogOpen, setIsDialogOpen] = React.useState({
+    isOpen: false,
+    mode: 'add',
+  });
   const [events, setEvents] = React.useState<Event[]>([]);
+  const [eventToEdit, setEventToEdit] = React.useState<Event>();
   const handleAddEvent = () => {
-    setIsDialogOpen(true);
+    setIsDialogOpen({ isOpen: true, mode: 'add' });
   };
 
   React.useEffect(() => {
@@ -55,8 +70,23 @@ function Home() {
     try {
       await addEvent({ data: newEvent });
       setEvents([...events, newEvent]);
-      setIsDialogOpen(false);
+      setIsDialogOpen({ isOpen: false, mode: 'add' });
       toast('✅ Event created successfully');
+    } catch (err) {
+      toast('❌ Ops.. something went wrong');
+    }
+  };
+
+  const handleEditEventSubmit = async (event: Event) => {
+    try {
+      debugger;
+      await updateEvent({ data: event });
+      const newEvents = [...events];
+      const index = newEvents.findIndex((ev) => ev.id === event.id);
+      newEvents[index] = event;
+      setEvents(newEvents);
+      setIsDialogOpen({ isOpen: false, mode: 'add' });
+      toast('✅ Event updated successfully');
     } catch (err) {
       toast('❌ Ops.. something went wrong');
     }
@@ -108,7 +138,7 @@ function Home() {
         </button>
       </nav>
 
-      {isDialogOpen && (
+      {isDialogOpen.isOpen && (
         <div
           style={{
             position: 'fixed',
@@ -130,12 +160,26 @@ function Home() {
               position: 'absolute',
               top: '20%',
             }}
-            open={isDialogOpen}
+            open={isDialogOpen.isOpen}
           >
-            <AddEventForm
-              handleSubmit={handleAddEventSubmit}
-              handleClose={() => setIsDialogOpen(false)}
-            />
+            {isDialogOpen.mode === 'add' ? (
+              <AddEventForm
+                mode='add'
+                handleAdd={handleAddEventSubmit}
+                handleClose={() =>
+                  setIsDialogOpen({ isOpen: false, mode: 'add' })
+                }
+              />
+            ) : (
+              <AddEventForm
+                mode='edit'
+                handleEdit={handleEditEventSubmit}
+                handleClose={() =>
+                  setIsDialogOpen({ isOpen: false, mode: 'add' })
+                }
+                event={eventToEdit ?? ({} as Event)}
+              />
+            )}
           </dialog>
         </div>
       )}
@@ -180,13 +224,12 @@ function Home() {
           {events.map((event: Event) => (
             <EventCard
               key={event.id}
-              id={event.id}
-              communityName={event.communityName}
-              eventDate={event.eventDate}
-              eventDescription={event.eventDescription}
-              eventLink={event.eventLink}
-              eventTitle={event.eventTitle}
+              event={event}
               handleDelete={handleEventDelete}
+              handleEdit={() => {
+                setIsDialogOpen({ isOpen: true, mode: 'edit' });
+                setEventToEdit(event);
+              }}
             />
           ))}
         </div>

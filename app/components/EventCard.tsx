@@ -1,18 +1,16 @@
 import { Event } from '@prisma/client';
-import { LucideKanban, Pencil, Trash } from 'lucide-react';
+import { Pencil, Trash } from 'lucide-react';
 
-type EventProps = Omit<Event, 'createdAt' | 'updatedAt'> & {
+interface EventProps {
+  event: Event;
   handleDelete: (id: string) => void;
-};
+  handleEdit: (event: Event) => void;
+}
 
 export const EventCard: React.FC<EventProps> = ({
-  id,
-  communityName,
-  eventDate,
-  eventDescription,
-  eventLink,
-  eventTitle,
+  event,
   handleDelete,
+  handleEdit,
 }) => {
   return (
     <div
@@ -37,7 +35,7 @@ export const EventCard: React.FC<EventProps> = ({
             border: 'none',
             color: 'gray',
           }}
-          onClick={() => alert('edit')}
+          onClick={() => handleEdit(event)}
         >
           <Pencil />
         </button>
@@ -48,7 +46,7 @@ export const EventCard: React.FC<EventProps> = ({
             border: 'none',
             color: 'gray',
           }}
-          onClick={() => handleDelete(id)}
+          onClick={() => handleDelete(event.id)}
         >
           <Trash />
         </button>
@@ -89,14 +87,14 @@ export const EventCard: React.FC<EventProps> = ({
           <h2>
             <a
               style={{ color: '#0E577B' }}
-              href={eventLink}
+              href={event.eventLink}
               target='_blank'
               rel='noopener noreferrer'
             >
-              {eventTitle}
+              {event.eventTitle}
             </a>
           </h2>
-          <p style={{}}>{eventDescription}</p>
+          <p style={{}}>{event.eventDescription}</p>
           <div
             style={{
               display: 'flex',
@@ -104,8 +102,8 @@ export const EventCard: React.FC<EventProps> = ({
               gap: '12px',
             }}
           >
-            <p>{eventDate.toLocaleDateString('it-IT')}</p>
-            <p>{communityName}</p>
+            <p>{event.eventDate.toLocaleDateString('it-IT')}</p>
+            <p>{event.communityName}</p>
           </div>
         </div>
       </div>

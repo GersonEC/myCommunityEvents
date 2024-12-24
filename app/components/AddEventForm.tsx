@@ -3,30 +3,40 @@ import ReactDOM from 'react-dom/client';
 import { useForm } from '@tanstack/react-form';
 import { Event as EventPrisma } from '@prisma/client';
 
-interface Props {
-  handleSubmit: (values: Event) => void;
-  handleClose: () => void;
-}
+type Props =
+  | {
+      mode: 'add';
+      handleAdd: (values: Event) => void;
+      handleClose: () => void;
+    }
+  | {
+      mode: 'edit';
+      event: Event;
+      handleEdit: (values: Event) => void;
+      handleClose: () => void;
+    };
 
-type Event = Omit<EventPrisma, 'updatedAt' | 'createdAt' | 'id'>;
+type Event = Omit<EventPrisma, 'updatedAt' | 'createdAt'>;
 
-const initialEventFormDefaultValue: Event = {
-  communityName: '',
-  eventDate: new Date(),
-  eventDescription: '',
-  eventLink: '',
-  eventTitle: '',
-};
+export const AddEventForm: React.FC<Props> = (props: Props) => {
+  const initialEventFormDefaultValue: Event = {
+    id: props.mode === 'add' ? '' : props.event.id,
+    communityName: props.mode === 'add' ? '' : props.event.communityName,
+    eventDate: props.mode === 'add' ? new Date() : props.event.eventDate,
+    eventDescription: props.mode === 'add' ? '' : props.event.eventDescription,
+    eventLink: props.mode === 'add' ? '' : props.event.eventLink,
+    eventTitle: props.mode === 'add' ? '' : props.event.eventTitle,
+  };
 
-export const AddEventForm: React.FC<Props> = ({
-  handleSubmit,
-  handleClose,
-}) => {
   const form = useForm<Event>({
     defaultValues: initialEventFormDefaultValue,
     onSubmit: async ({ value }) => {
       // Do something with form data
-      handleSubmit(value);
+      if (props.mode === 'add') {
+        props.handleAdd(value);
+      } else {
+        props.handleEdit(value);
+      }
     },
   });
 
@@ -46,7 +56,9 @@ export const AddEventForm: React.FC<Props> = ({
           alignItems: 'center',
         }}
       >
-        <h2 style={{ color: 'white' }}>Add new Event</h2>
+        <h2 style={{ color: 'white' }}>
+          {props.mode === 'add' ? 'Add new Event' : 'Edit Event'}
+        </h2>
         <button
           style={{
             borderRadius: '4px',
@@ -56,7 +68,7 @@ export const AddEventForm: React.FC<Props> = ({
             color: 'white',
             padding: '8px',
           }}
-          onClick={handleClose}
+          onClick={props.handleClose}
           title='Close'
         >
           X
