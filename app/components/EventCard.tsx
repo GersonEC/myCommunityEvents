@@ -1,4 +1,5 @@
 import { Event } from '@prisma/client';
+import { LucideKanban, Pencil, Trash } from 'lucide-react';
 
 type EventProps = Omit<Event, 'createdAt' | 'updatedAt'> & {
   handleDelete: (id: string) => void;
@@ -14,24 +15,42 @@ export const EventCard: React.FC<EventProps> = ({
   handleDelete,
 }) => {
   return (
-    <div style={{}}>
+    <div
+      style={{
+        minWidth: '400px',
+        maxWidth: '700px',
+        width: '95%',
+      }}
+    >
       <div
         style={{
           display: 'flex',
           justifyContent: 'end',
-          paddingRight: '16px',
+          paddingRight: '12px',
           marginBottom: '4px',
         }}
       >
         <button
           style={{
             borderRadius: '4px',
-            border: '1px solid gray',
             background: 'none',
+            border: 'none',
+            color: 'gray',
+          }}
+          onClick={() => alert('edit')}
+        >
+          <Pencil />
+        </button>
+        <button
+          style={{
+            borderRadius: '4px',
+            background: 'none',
+            border: 'none',
+            color: 'gray',
           }}
           onClick={() => handleDelete(id)}
         >
-          🗑️
+          <Trash />
         </button>
       </div>
       <div
@@ -43,9 +62,7 @@ export const EventCard: React.FC<EventProps> = ({
           gap: '8px',
           alignItems: 'center',
           boxSizing: 'border-box',
-          minWidth: '400px',
-          maxWidth: '700px',
-          width: '95%',
+
           maxHeight: '350px',
           paddingRight: '32px',
 
