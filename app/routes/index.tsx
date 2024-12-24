@@ -8,6 +8,7 @@ import MilanSkyline from '../assets/skyline-milano.png';
 import { AddEventForm } from '../components/AddEventForm';
 import { prisma } from '../utils/prisma';
 import { Event } from '@prisma/client';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const getEvents = createServerFn().handler(async () => {
   return await prisma.event.findMany();
@@ -51,15 +52,27 @@ function Home() {
   }, []);
 
   const handleAddEventSubmit = async (newEvent: Event) => {
-    setEvents([...events, newEvent]);
-    setIsDialogOpen(false);
-    await addEvent({ data: newEvent });
+    try {
+      await addEvent({ data: newEvent });
+      setEvents([...events, newEvent]);
+      setIsDialogOpen(false);
+      toast('✅ Event created successfully');
+    } catch (err) {
+      toast('❌ Ops.. something went wrong');
+    }
   };
 
   const handleEventDelete = async (id: string) => {
-    const newEvents = events.filter((event) => event.id !== id);
-    setEvents(newEvents);
-    await removeEvent({ data: id });
+    if (window.confirm('Are you sure you want to delte this event?')) {
+      try {
+        const newEvents = events.filter((event) => event.id !== id);
+        setEvents(newEvents);
+        await removeEvent({ data: id });
+        toast('✅ Event deleted successfully');
+      } catch (err) {
+        toast('❌ Ops.. something went wrong');
+      }
+    }
   };
 
   return (
@@ -177,6 +190,7 @@ function Home() {
             />
           ))}
         </div>
+        <ToastContainer theme='dark' autoClose={3000} />
       </div>
     </div>
   );
