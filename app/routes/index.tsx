@@ -11,7 +11,13 @@ import { Event } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
 export const getEvents = createServerFn().handler(async () => {
-  return await prisma.event.findMany();
+  return await prisma.event.findMany({
+    orderBy: [
+      {
+        eventDate: 'desc',
+      },
+    ],
+  });
 });
 
 const addEvent = createServerFn({ method: 'POST' })
