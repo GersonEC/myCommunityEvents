@@ -73,8 +73,12 @@ function Home() {
 
   React.useEffect(() => {
     const fetchEvents = async () => {
-      const data = (await getEvents()) as Event[];
-      setEvents(data);
+      try {
+        const data = (await getEvents()) as Event[];
+        setEvents(data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchEvents();
   }, []);
@@ -92,7 +96,6 @@ function Home() {
 
   const handleEditEventSubmit = async (event: Event) => {
     try {
-      debugger;
       await updateEvent({ data: event });
       const newEvents = [...events];
       const index = newEvents.findIndex((ev) => ev.id === event.id);
