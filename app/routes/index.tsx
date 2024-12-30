@@ -11,10 +11,17 @@ import { Event } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
 export const getEvents = createServerFn().handler(async () => {
+  let today = new Date();
+  today.setHours(0);
   return await prisma.event.findMany({
+    where: {
+      eventDate: {
+        gte: today,
+      },
+    },
     orderBy: [
       {
-        eventDate: 'desc',
+        eventDate: 'asc',
       },
     ],
   });
