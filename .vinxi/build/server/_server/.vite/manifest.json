@@ -1,0 +1,41 @@
+{
+  "_index.mjs": {
+    "file": "index.mjs",
+    "name": "index",
+    "dynamicImports": [
+      "app/routes/index.tsx?tsr-split"
+    ]
+  },
+  "app/assets/skyline-milano.png": {
+    "file": "assets/skyline-milano-BEzzB3lN.png",
+    "src": "app/assets/skyline-milano.png"
+  },
+  "app/routes/index.tsx": {
+    "file": "c_11mpvlw.mjs",
+    "name": "c_11mpvlw",
+    "src": "app/routes/index.tsx",
+    "isEntry": true,
+    "imports": [
+      "_index.mjs"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split": {
+    "file": "c_1n1tvvr.mjs",
+    "name": "c_1n1tvvr",
+    "src": "app/routes/index.tsx?tsr-split",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index.mjs"
+    ],
+    "assets": [
+      "assets/skyline-milano-BEzzB3lN.png"
+    ]
+  },
+  "virtual:$vinxi/handler/server": {
+    "file": "entry.mjs",
+    "name": "entry",
+    "src": "virtual:$vinxi/handler/server",
+    "isEntry": true
+  }
+}

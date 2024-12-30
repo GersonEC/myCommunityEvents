@@ -1,0 +1,44 @@
+{
+  "_client-CQfkRPTm.js": {
+    "file": "assets/client-CQfkRPTm.js",
+    "name": "client",
+    "dynamicImports": [
+      "app/routes/calendar.tsx?tsr-split",
+      "app/routes/index.tsx?tsr-split"
+    ]
+  },
+  "app/assets/skyline-milano.png": {
+    "file": "assets/skyline-milano-BEzzB3lN.png",
+    "src": "app/assets/skyline-milano.png"
+  },
+  "app/routes/calendar.tsx?tsr-split": {
+    "file": "assets/calendar-Ckbw-xCa.js",
+    "name": "calendar",
+    "src": "app/routes/calendar.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CQfkRPTm.js"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split": {
+    "file": "assets/index-CkAnoEfI.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-CQfkRPTm.js"
+    ],
+    "assets": [
+      "assets/skyline-milano-BEzzB3lN.png"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-CjWbXnil.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_client-CQfkRPTm.js"
+    ]
+  }
+}

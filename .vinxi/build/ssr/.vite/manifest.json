@@ -1,0 +1,41 @@
+{
+  "_ssr-Bpc28poy.js": {
+    "file": "assets/ssr-Bpc28poy.js",
+    "name": "ssr",
+    "dynamicImports": [
+      "app/routes/calendar.tsx?tsr-split",
+      "app/routes/index.tsx?tsr-split"
+    ]
+  },
+  "app/assets/skyline-milano.png": {
+    "file": "assets/skyline-milano-BEzzB3lN.png",
+    "src": "app/assets/skyline-milano.png"
+  },
+  "app/routes/calendar.tsx?tsr-split": {
+    "file": "assets/calendar-BtuAHGOy.js",
+    "name": "calendar",
+    "src": "app/routes/calendar.tsx?tsr-split",
+    "isDynamicEntry": true
+  },
+  "app/routes/index.tsx?tsr-split": {
+    "file": "assets/index-C0CpJkiP.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ssr-Bpc28poy.js"
+    ],
+    "assets": [
+      "assets/skyline-milano-BEzzB3lN.png"
+    ]
+  },
+  "virtual:$vinxi/handler/ssr": {
+    "file": "ssr.js",
+    "name": "ssr",
+    "src": "virtual:$vinxi/handler/ssr",
+    "isEntry": true,
+    "imports": [
+      "_ssr-Bpc28poy.js"
+    ]
+  }
+}
