@@ -71,7 +71,7 @@ function Home() {
     setIsDialogOpen({ isOpen: true, mode: 'add' });
   };
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const fetchEvents = async () => {
       try {
         const data = (await getEvents()) as Event[];
@@ -81,7 +81,7 @@ function Home() {
       }
     };
     fetchEvents();
-  }, []);
+  }, []);*/
 
   const handleAddEventSubmit = async (newEvent: Event) => {
     try {
@@ -227,7 +227,8 @@ function Home() {
           justifyContent: 'center',
         }}
       >
-        <div
+        Ciao
+        {/*<div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -248,7 +249,7 @@ function Home() {
               }}
             />
           ))}
-        </div>
+        </div>*/}
         <ToastContainer theme='dark' autoClose={3000} />
       </div>
     </div>
