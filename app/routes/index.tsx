@@ -10,7 +10,7 @@ import { prisma } from '../utils/prisma';
 import { Event } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
-export const getEvents = createServerFn().handler(async () => {
+/*export const getEvents = createServerFn().handler(async () => {
   let today = new Date();
   today.setHours(0);
   return await prisma.event.findMany({
@@ -25,9 +25,9 @@ export const getEvents = createServerFn().handler(async () => {
       },
     ],
   });
-});
+});*/
 
-const addEvent = createServerFn({ method: 'POST' })
+/*const addEvent = createServerFn({ method: 'POST' })
   .validator((d: Event) => d)
   .handler(async ({ data }) => {
     const newEvent = await prisma.event.create({ data });
@@ -53,7 +53,7 @@ const updateEvent = createServerFn({ method: 'POST' })
       },
       data,
     });
-  });
+  });*/
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -83,7 +83,7 @@ function Home() {
     fetchEvents();
   }, []);*/
 
-  const handleAddEventSubmit = async (newEvent: Event) => {
+  /*const handleAddEventSubmit = async (newEvent: Event) => {
     try {
       await addEvent({ data: newEvent });
       setEvents([...events, newEvent]);
@@ -119,7 +119,7 @@ function Home() {
         toast('❌ Ops.. something went wrong');
       }
     }
-  };
+  };*/
 
   return (
     <div>
@@ -181,7 +181,7 @@ function Home() {
             {isDialogOpen.mode === 'add' ? (
               <AddEventForm
                 mode='add'
-                handleAdd={handleAddEventSubmit}
+                handleAdd={/*handleAddEventSubmit*/ () => {}}
                 handleClose={() =>
                   setIsDialogOpen({ isOpen: false, mode: 'add' })
                 }
@@ -189,7 +189,7 @@ function Home() {
             ) : (
               <AddEventForm
                 mode='edit'
-                handleEdit={handleEditEventSubmit}
+                handleEdit={/*handleEditEventSubmit*/ () => {}}
                 handleClose={() =>
                   setIsDialogOpen({ isOpen: false, mode: 'add' })
                 }
