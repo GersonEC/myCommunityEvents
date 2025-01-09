@@ -6,11 +6,12 @@ import { createServerFn } from '@tanstack/start';
 import { EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
 import { AddEventForm } from '../components/AddEventForm';
-import { prisma } from '../utils/prisma';
-import { Event } from '@prisma/client';
+// import { prisma } from '../utils/prisma';
+import { Event, PrismaClient } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
 export const getEvents = createServerFn().handler(async () => {
+  const prisma = new PrismaClient();
   let today = new Date();
   today.setHours(0);
   return await prisma.event.findMany({
@@ -227,8 +228,7 @@ function Home() {
           justifyContent: 'center',
         }}
       >
-        Ciao
-        {/*<div
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -242,14 +242,14 @@ function Home() {
             <EventCard
               key={event.id}
               event={event}
-              handleDelete={handleEventDelete}
+              handleDelete={/*handleEventDelete*/ () => {}}
               handleEdit={() => {
                 setIsDialogOpen({ isOpen: true, mode: 'edit' });
                 setEventToEdit(event);
               }}
             />
           ))}
-        </div>*/}
+        </div>
         <ToastContainer theme='dark' autoClose={3000} />
       </div>
     </div>
