@@ -10,7 +10,7 @@ import { prisma } from '../utils/prisma';
 import { Event } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
-/*export const getEvents = createServerFn().handler(async () => {
+export const getEvents = createServerFn().handler(async () => {
   let today = new Date();
   today.setHours(0);
   return await prisma.event.findMany({
@@ -25,7 +25,7 @@ import { toast, ToastContainer } from 'react-toastify';
       },
     ],
   });
-});*/
+});
 
 /*const addEvent = createServerFn({ method: 'POST' })
   .validator((d: Event) => d)
@@ -71,7 +71,7 @@ function Home() {
     setIsDialogOpen({ isOpen: true, mode: 'add' });
   };
 
-  /*React.useEffect(() => {
+  React.useEffect(() => {
     const fetchEvents = async () => {
       try {
         const data = (await getEvents()) as Event[];
@@ -81,7 +81,7 @@ function Home() {
       }
     };
     fetchEvents();
-  }, []);*/
+  }, []);
 
   /*const handleAddEventSubmit = async (newEvent: Event) => {
     try {
