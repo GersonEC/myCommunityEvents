@@ -10,9 +10,8 @@ import { AddEventForm } from '../components/AddEventForm';
 import { Event, PrismaClient } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
 
-const prisma = new PrismaClient();
-
 export const getEvents = createServerFn().handler(async () => {
+  const prisma = new PrismaClient();
   let today = new Date();
   today.setHours(0);
   return await prisma.event.findMany({
@@ -32,6 +31,7 @@ export const getEvents = createServerFn().handler(async () => {
 const addEvent = createServerFn({ method: 'POST' })
   .validator((d: Event) => d)
   .handler(async ({ data }) => {
+    const prisma = new PrismaClient();
     const newEvent = await prisma.event.create({ data });
     return newEvent;
   });
@@ -39,6 +39,7 @@ const addEvent = createServerFn({ method: 'POST' })
 const removeEvent = createServerFn({ method: 'POST' })
   .validator((d: string) => d)
   .handler(async ({ data }) => {
+    const prisma = new PrismaClient();
     return await prisma.event.delete({
       where: {
         id: data,
@@ -49,6 +50,8 @@ const removeEvent = createServerFn({ method: 'POST' })
 const updateEvent = createServerFn({ method: 'POST' })
   .validator((event: Event) => event)
   .handler(async ({ data }) => {
+    const prisma = new PrismaClient();
+
     return await prisma.event.update({
       where: {
         id: data.id,
