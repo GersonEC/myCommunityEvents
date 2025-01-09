@@ -6,9 +6,11 @@ import { createServerFn } from '@tanstack/start';
 import { EventCard } from '../components/EventCard';
 import MilanSkyline from '../assets/skyline-milano.png';
 import { AddEventForm } from '../components/AddEventForm';
-import { prisma } from '../utils/prisma';
+// import { prisma } from '../utils/prisma';
 import { Event, PrismaClient } from '@prisma/client';
 import { toast, ToastContainer } from 'react-toastify';
+
+const prisma = new PrismaClient();
 
 export const getEvents = createServerFn().handler(async () => {
   let today = new Date();
